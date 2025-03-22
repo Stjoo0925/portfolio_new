@@ -6,22 +6,68 @@ import { FaGithub } from 'react-icons/fa'
 
 const Hero = () => {
   return (
-    <section id="main" className="min-h-screen bg-[#0D1117] relative overflow-hidden">
-
-      {/* 배경 패턴 */}
-      <div className="absolute inset-0 -z-10 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)`,
-          backgroundSize: '30px 30px'
-        }}></div>
-      </div>
-
-      {/* 애니메이션된 원형 요소들 */}
-      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-[#FD5F07]/30 rounded-full blur-2xl animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-56 h-56 bg-[#FD5F07]/30 rounded-full blur-2xl animate-float-delayed"></div>
-      <div className="absolute top-1/2 right-1/3 w-40 h-40 bg-[#FFFFFF]/30 rounded-full blur-2xl animate-float-more-delayed"></div>
+    <section id="main" className="min-h-screen bg-[#070B14] relative overflow-hidden">
+      {/* 우주 배경 - 새벽 효과 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1B40] via-[#372554] to-[#070B14] opacity-70 -z-10"></div>
       
-      <div className="section-container">
+      {/* 별이 빛나는 배경 */}
+      <div className="absolute inset-0 bg-[url('/stars.svg')] bg-repeat opacity-50 -z-5"></div>
+      
+      {/* 새벽 빛 효과 */}
+      <div className="absolute top-0 left-0 w-full h-[30vh] bg-gradient-to-b from-[#FF6B6B]/10 via-[#E7A2A2]/5 to-transparent blur-xl"></div>
+      
+      {/* 빛나는 큰 별 */}
+      <div className="absolute top-20 right-[15%] w-4 h-4 bg-white rounded-full animate-pulse-slow" 
+           style={{boxShadow: '0 0 20px 10px rgba(255, 255, 255, 0.2), 0 0 40px 20px rgba(255, 255, 255, 0.05)'}}></div>
+      
+      {/* 별똥별 효과 - 하나만 유지 */}
+      <motion.div
+        key="hero-meteor"
+        className="absolute h-0.5 bg-white rounded-full hidden md:block"
+        style={{
+          top: '25%',
+          left: '100%',
+          width: '100px',
+          opacity: 0,
+          transform: 'rotate(-15deg)',
+          boxShadow: '0 0 8px 1px rgba(255, 255, 255, 0.5)',
+        }}
+        animate={{
+          x: [0, -2000],
+          opacity: [0, 1, 1, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatDelay: 20,
+          ease: "easeOut",
+        }}
+      />
+      
+      {/* 부유하는 빛 입자 - 수를 10개로 줄임 */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={`hero-particle-${i}`}
+          className="absolute w-1 h-1 bg-white/30 rounded-full hidden md:block"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -20],
+            opacity: [0.1, 0.4, 0],
+          }}
+          transition={{
+            duration: 5 + Math.random() * 3,
+            repeat: Infinity,
+            repeatDelay: Math.random() * 5,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+            
+      <div className="container mx-auto px-6 md:px-12 relative z-10 flex flex-col h-screen justify-center">
         <div className="flex flex-col items-center justify-center h-screen-80 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

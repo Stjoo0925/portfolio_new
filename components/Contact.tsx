@@ -9,9 +9,46 @@ const Contact = () => {
   const currentPage = 4
 
   return (
-    <section id="contact" className="bg-[#0D1117] relative overflow-hidden">
+    <section id="contact" className="bg-[#070B14] relative overflow-hidden min-h-screen py-20">
+      {/* 우주 배경 - 블랙홀 및 통신 테마 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A101F] to-[#030712] -z-10"></div>
+      
+      {/* 별이 빛나는 배경 */}
+      <div className="absolute inset-0 bg-[url('/stars.svg')] bg-repeat opacity-20 -z-5"></div>
+      
+      {/* 통신 파동 효과 - 2개로 줄임 */}
+      {[...Array(2)].map((_, i) => (
+        <div 
+          key={`contact-wave-${i}`}
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 rounded-full border border-[#60A5FA]/5 animate-wave-expand hidden md:block"
+          style={{
+            width: `${i * 10 + 10}vw`,
+            height: `${i * 10 + 10}vw`,
+            animationDelay: `${i * 0.7}s`,
+          }}
+        ></div>
+      ))}
+      
+      {/* 데이터 스트림 효과 - 하나만 유지 */}
+      <div className="absolute top-[10%] right-[5%] w-[2px] h-[30vh] overflow-hidden hidden md:block">
+        <div className="w-full h-[150%] -mt-[50%] bg-gradient-to-b from-transparent via-[#3B82F6]/30 to-transparent animate-data-stream"></div>
+      </div>
+      
+      {/* 작은 별</하얀 점들 - 10개로 줄임 */}
+      {[...Array(10)].map((_, i) => (
+        <div
+          key={`contact-star-${i}`}
+          className="absolute w-0.5 h-0.5 bg-white/40 rounded-full hidden md:block"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            opacity: Math.random() * 0.3 + 0.1,
+            animation: `twinkle-small ${Math.random() * 3 + 2}s ease-in-out infinite ${Math.random() * 2}s`
+          }}
+        ></div>
+      ))}
 
-      <div className="section-container">
+      <div className="section-container relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

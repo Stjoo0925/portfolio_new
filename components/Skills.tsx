@@ -68,9 +68,105 @@ const Skills = () => {
   )
   
   return (
-    <section id="skills" className="bg-[#0D1117] relative overflow-hidden">
+    <section id="skills" className="bg-[#070B14] relative overflow-hidden min-h-screen py-20">
+      {/* 우주 배경 - 별자리 테마 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A] to-[#070B14] -z-10"></div>
+      
+      {/* 별이 빛나는 배경 */}
+      <div className="absolute inset-0 bg-[url('/stars.svg')] bg-repeat opacity-50 -z-5"></div>
+      
+      {/* 희미한 성운 */}
+      <div className="absolute left-0 top-[20%] w-full h-[50vh] bg-gradient-to-r from-[#3F00FF]/5 via-[#8B5CF6]/5 to-[#3F00FF]/5 blur-3xl animate-nebula-fade opacity-20 -z-5"></div>
+      
+      {/* 별자리 라인 네트워크 */}
+      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#FFFFFF" strokeOpacity="0.07" strokeWidth="1">
+          <line x1="10%" y1="20%" x2="30%" y2="35%" className="animate-constellation-line"></line>
+          <line x1="30%" y1="35%" x2="45%" y2="25%" className="animate-constellation-line"></line>
+          <line x1="45%" y1="25%" x2="60%" y2="40%" className="animate-constellation-line"></line>
+          <line x1="60%" y1="40%" x2="80%" y2="30%" className="animate-constellation-line"></line>
+          <line x1="80%" y1="30%" x2="90%" y2="45%" className="animate-constellation-line"></line>
+          <line x1="10%" y1="55%" x2="25%" y2="65%" className="animate-constellation-line"></line>
+          <line x1="25%" y1="65%" x2="40%" y2="70%" className="animate-constellation-line"></line>
+          <line x1="40%" y1="70%" x2="60%" y2="60%" className="animate-constellation-line"></line>
+          <line x1="60%" y1="60%" x2="75%" y2="75%" className="animate-constellation-line"></line>
+          <line x1="75%" y1="75%" x2="90%" y2="65%" className="animate-constellation-line"></line>
+          <line x1="30%" y1="35%" x2="25%" y2="65%" className="animate-constellation-line"></line>
+          <line x1="60%" y1="40%" x2="60%" y2="60%" className="animate-constellation-line"></line>
+        </g>
+      </svg>
+      
+      {/* 별자리 결절점 */}
+      {[
+        { x: '10%', y: '20%' }, { x: '30%', y: '35%' }, { x: '45%', y: '25%' }, 
+        { x: '60%', y: '40%' }, { x: '80%', y: '30%' }, { x: '90%', y: '45%' },
+        { x: '10%', y: '55%' }, { x: '25%', y: '65%' }, { x: '40%', y: '70%' },
+        { x: '60%', y: '60%' }, { x: '75%', y: '75%' }, { x: '90%', y: '65%' }
+      ].map((point, i) => (
+        <div 
+          key={`constellation-point-${i}`}
+          className="absolute w-1 h-1 bg-white rounded-full animate-glow-star-small hidden md:block"
+          style={{
+            left: point.x,
+            top: point.y,
+            opacity: 0.6,
+            boxShadow: '0 0 5px 1px rgba(255, 255, 255, 0.5)'
+          }}
+        ></div>
+      ))}
+      
+      {/* 유성 효과 */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={`skills-meteor-${i}`}
+          className="absolute h-0.5 bg-white rounded-full hidden md:block"
+          style={{
+            top: `${i * 25 + 15}%`,
+            left: '100%',
+            width: `${Math.random() * 80 + 40}px`,
+            opacity: 0,
+            transform: 'rotate(-20deg)',
+            boxShadow: '0 0 8px 1px rgba(255, 255, 255, 0.7)',
+          }}
+          animate={{
+            x: [0, -2000],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: Math.random() * 1.5 + 1,
+            repeat: Infinity,
+            repeatDelay: Math.random() * 15 + 10,
+            ease: "easeOut",
+            delay: i * 7,
+          }}
+        />
+      ))}
+      
+      {/* 움직이는 점/입자 (스킬 연결) */}
+      {[...Array(10)].map((_, i) => (
+        <motion.div
+          key={`skills-particle-${i}`}
+          className="absolute w-1 h-1 bg-[#FD5F07]/70 rounded-full hidden md:block"
+          style={{
+            top: `${Math.random() * 80 + 10}%`,
+            left: `${Math.random() * 80 + 10}%`,
+          }}
+          animate={{
+            y: [0, Math.random() * 100 - 50],
+            x: [0, Math.random() * 100 - 50],
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.7, 0.3]
+          }}
+          transition={{
+            duration: 15 + Math.random() * 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5
+          }}
+        />
+      ))}
 
-      <div className="section-container">
+      <div className="section-container relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

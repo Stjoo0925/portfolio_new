@@ -20,9 +20,53 @@ const About = () => {
   }
   
   return (
-    <section id="about" className="bg-[#0D1117] relative overflow-hidden">
+    <section id="about" className="bg-[#070B14] relative overflow-hidden min-h-screen py-20">
+      {/* 우주 배경 - 행성과 달 테마 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#070B14] to-[#0F172A] -z-10"></div>
+      
+      {/* 별이 빛나는 배경 */}
+      <div className="absolute inset-0 bg-[url('/stars.svg')] bg-repeat opacity-40 -z-5"></div>
+      
+      {/* 큰 행성 (지구형) - 더 투명하게 */}
+      <div className="absolute -top-40 -right-40 w-[80vw] h-[80vw] rounded-full bg-gradient-to-br from-[#1E3A8A] via-[#3B82F6]/20 to-[#1E3A8A]/5 animate-planet-rotate-slow opacity-20 hidden md:block">
+        <div className="absolute inset-0 rounded-full overflow-hidden">
+          <div className="absolute w-full h-[15%] bg-[#BFDBFE]/10 top-[20%] transform -rotate-12 blur-xl"></div>
+        </div>
+      </div>
+      
+      {/* 은하수 효과 */}
+      <div className="absolute bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-[#3B82F6]/5 via-[#8B5CF6]/5 to-transparent blur-2xl animate-nebula-glow-slow opacity-30 -z-5"></div>
+      
+      {/* 우주 행성 소행성 - 수를 4개로 줄임 */}
+      {[...Array(4)].map((_, i) => (
+        <motion.div
+          key={`about-asteroid-${i}`}
+          className="absolute bg-white rounded-full hidden md:block"
+          style={{
+            width: Math.random() * 2 + 1 + 'px',
+            height: Math.random() * 2 + 1 + 'px',
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            opacity: Math.random() * 0.3 + 0.1,
+          }}
+          animate={{
+            x: [0, Math.random() * 10 - 5],
+            y: [0, Math.random() * 10 - 5],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10 + Math.random() * 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+      
+      {/* 타원형 궤도 (달 궤도) */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[70vw] h-[30vw] border border-[#94A3B8]/10 rounded-full animate-orbit-slow opacity-20 hidden md:block"></div>
 
-      <div className="section-container">
+      <div className="section-container relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* 왼쪽 컬럼: 자기소개 */}
           <motion.div 
