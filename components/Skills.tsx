@@ -4,6 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from './animations/ScrollReveal'
 import Script from 'next/script'
+import Image from 'next/image'
 
 // 아이콘 컴포넌트 직접 정의
 const FrontendIcon = () => (
@@ -34,34 +35,37 @@ interface Skill {
   name: string
   icon: string
   color: string
+  description: string
 }
 
 const Skills = () => {
+  const currentPage = 2
+
   const frontendSkills: Skill[] = [
-    { name: 'Vue', icon: 'vuedotjs', color: '4FC08D' },
-    { name: 'React', icon: 'react', color: '61DAFB' },
-    { name: 'JavaScript', icon: 'javascript', color: 'F7DF1E' },
-    { name: 'TypeScript', icon: 'typescript', color: '3178C6' },
+    { name: 'Vue', icon: 'https://cdn.simpleicons.org/vuedotjs/4FC08D', color: '4FC08D', description: 'Vue.js는 웹 애플리케이션을 만드는 데 사용되는 프론트엔드 프레임워크입니다.' },
+    { name: 'React', icon: 'https://cdn.simpleicons.org/react/61DAFB', color: '61DAFB', description: 'React는 웹 애플리케이션을 만드는 데 사용되는 프론트엔드 프레임워크입니다.' },
+    { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E', color: 'F7DF1E', description: 'JavaScript는 웹 페이지에 생동감을 더해주는 프로그래밍 언어입니다.' },
+    { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6', color: '3178C6', description: 'TypeScript는 JavaScript의 슈퍼셋입니다.' },
   ]
   
   const backendSkills: Skill[] = [
-    { name: 'Java', icon: 'openjdk', color: '437291' },
-    { name: 'Spring', icon: 'spring', color: '6DB33F' },
-    { name: 'Python', icon: 'python', color: '3776AB' },
-    { name: 'PyTorch', icon: 'pytorch', color: 'EE4C2C' },
+    { name: 'Java', icon: 'https://cdn.simpleicons.org/openjdk/437291', color: '437291', description: 'Java는 웹 애플리케이션을 만드는 데 사용되는 프로그래밍 언어입니다.' },
+    { name: 'Spring', icon: 'https://cdn.simpleicons.org/spring/6DB33F', color: '6DB33F', description: 'Spring은 자바 플랫폼을 위한 오픈소스 애플리케이션 프레임워크입니다.' },
+    { name: 'Python', icon: 'https://cdn.simpleicons.org/python/3776AB', color: '3776AB', description: 'Python은 프로그래밍 언어입니다.' },
+    { name: 'PyTorch', icon: 'https://cdn.simpleicons.org/pytorch/EE4C2C', color: 'EE4C2C', description: 'PyTorch는 파이썬을 위한 오픈소스 딥러닝 라이브러리입니다.' },
   ]
   
   const devopsSkills: Skill[] = [
-    { name: 'MySQL', icon: 'mysql', color: '4479A1' },
-    { name: 'AWS EC2', icon: 'amazonec2', color: '232F3E' },
-    { name: 'Docker', icon: 'docker', color: '2496ED' },
-    { name: 'GitHub Actions', icon: 'githubactions', color: '2088FF' },
+    { name: 'MySQL', icon: 'https://cdn.simpleicons.org/mysql/4479A1', color: '4479A1', description: 'MySQL은 관계형 데이터베이스 관리 시스템입니다.' },
+    { name: 'AWS EC2', icon: 'https://cdn.simpleicons.org/amazonec2/232F3E', color: '232F3E', description: 'AWS EC2는 클라우드에서 확장 가능한 용량을 제공하는 웹 서비스입니다.' },
+    { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker/2496ED', color: '2496ED', description: 'Docker는 애플리케이션을 컨테이너화하는 오픈소스 프로젝트입니다.' },
+    { name: 'GitHub Actions', icon: 'https://cdn.simpleicons.org/githubactions/2088FF', color: '2088FF', description: 'GitHub Actions는 소프트웨어 개발을 위한 자동화된 워크플로입니다.' },
   ]
   
   const collaborationSkills: Skill[] = [
-    { name: 'Figma', icon: 'figma', color: 'F24E1E' },
-    { name: 'Git', icon: 'git', color: 'F05032' },
-    { name: 'GitHub', icon: 'github', color: '181717' },
+    { name: 'Figma', icon: 'https://cdn.simpleicons.org/figma/F24E1E', color: 'F24E1E', description: 'Figma는 협업을 위한 디자인 도구입니다.' },
+    { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032', color: 'F05032', description: 'Git은 소스 코드를 관리하는 데 사용되는 분산 버전 관리 시스템입니다.' },
+    { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717', color: '181717', description: 'GitHub는 소스 코드를 저장하고 협업하는 데 사용되는 웹 기반 호스팅 서비스입니다.' },
   ]
   
   const SkillItem = ({ skill, index }: { skill: Skill, index: number }) => (
@@ -74,7 +78,7 @@ const Skills = () => {
       <div className="flex items-center p-3 bg-white/80 rounded-xl hover:bg-white hover:shadow-sm transition-all">
         <div className="w-6 h-6 mr-3 flex items-center justify-center">
           <img 
-            src={`https://cdn.simpleicons.org/${skill.icon}/${skill.color}`} 
+            src={skill.icon}
             alt={skill.name} 
             className="w-5 h-5" 
           />
@@ -85,95 +89,140 @@ const Skills = () => {
   )
   
   return (
-    <section id="skills" className="py-24 md:py-32 bg-gray-50 relative overflow-hidden">
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-bl from-blue-100 to-transparent rounded-full opacity-80 blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-100 to-transparent rounded-full opacity-50 blur-3xl"></div>
-      
-      <div className="container px-4 mx-auto relative z-10">
-        <ScrollReveal>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-apple-blue to-blue-600">
+    <section id="skills" className="bg-[#0D1117] relative overflow-hidden">
+
+      <div className="section-container">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FD5F07] to-[#FFFFFF]">
               Skills
             </span>
           </h2>
-        </ScrollReveal>
-        
-        <ScrollReveal delay={0.1}>
-          <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
-            다양한 프로젝트를 통해 습득한 기술들입니다.
-          </p>
-        </ScrollReveal>
-        
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-6 lg:gap-8">
-            <ScrollReveal delay={0.2}>
-              <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl shadow-apple hover:shadow-apple-hover border border-gray-100 transition-all duration-300 h-[360px]">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-lg">
-                    <FrontendIcon />
-                  </div>
-                  <h3 className="text-xl font-bold ml-4 text-apple-dark">Frontend</h3>
-                </div>
-                
-                <div>
-                  {frontendSkills.map((skill, index) => (
-                    <SkillItem key={skill.name} skill={skill} index={index} />
-                  ))}
-                </div>
+          <p className="text-gray-200">다양한 프로젝트를 통해 습득한 기술들입니다.</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Frontend Skills */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="bg-[#21262D]/50 backdrop-blur-sm p-6 rounded-xl border border-[#FD5F07]/20 hover:border-[#FD5F07]/40 transition-colors duration-300"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#FD5F07] rounded-lg">
+                <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.3}>
-              <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl shadow-apple hover:shadow-apple-hover border border-gray-100 transition-all duration-300 h-[360px]">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-lg">
-                    <BackendIcon />
+              <h3 className="text-xl font-bold text-[#FD5F07]">Frontend</h3>
+            </div>
+            <ul className="space-y-4">
+              {frontendSkills.map((skill, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FD5F07] mt-2"></div>
+                  <div>
+                    <p className="text-gray-300 font-medium">{skill.name}</p>
+                    <p className="text-gray-400 text-sm">{skill.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold ml-4 text-apple-dark">Backend</h3>
-                </div>
-                
-                <div>
-                  {backendSkills.map((skill, index) => (
-                    <SkillItem key={skill.name} skill={skill} index={index} />
-                  ))}
-                </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Backend Skills */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="bg-[#21262D]/50 backdrop-blur-sm p-6 rounded-xl border border-[#ff4500]/20 hover:border-[#FD5F07]/40 transition-colors duration-300"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#FD5F07] rounded-lg">
+                <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
               </div>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.4}>
-              <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl shadow-apple hover:shadow-apple-hover border border-gray-100 transition-all duration-300 h-[360px]">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center text-white shadow-lg">
-                    <DevOpsIcon />
+              <h3 className="text-xl font-bold text-[#FD5F07]">Backend</h3>
+            </div>
+            <ul className="space-y-4">
+              {backendSkills.map((skill, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FD5F07] mt-2"></div>
+                  <div>
+                    <p className="text-gray-300 font-medium">{skill.name}</p>
+                    <p className="text-gray-400 text-sm">{skill.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold ml-4 text-apple-dark">DB & DevOps</h3>
-                </div>
-                
-                <div>
-                  {devopsSkills.map((skill, index) => (
-                    <SkillItem key={skill.name} skill={skill} index={index} />
-                  ))}
-                </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* DevOps Skills */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="bg-[#21262D]/50 backdrop-blur-sm p-6 rounded-xl border border-[#FD5F07]/20 hover:border-[#FD5F07]/40 transition-colors duration-300"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#FD5F07] rounded-lg">
+                <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
-            </ScrollReveal>
-            
-            <ScrollReveal delay={0.5}>
-              <div className="bg-white/20 backdrop-blur-sm p-6 rounded-2xl shadow-apple hover:shadow-apple-hover border border-gray-100 transition-all duration-300 h-[360px]">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white shadow-lg">
-                    <CollaborationIcon />
+              <h3 className="text-xl font-bold text-[#FD5F07]">DevOps</h3>
+            </div>
+            <ul className="space-y-4">
+              {devopsSkills.map((skill, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FD5F07] mt-2"></div>
+                  <div>
+                    <p className="text-gray-300 font-medium">{skill.name}</p>
+                    <p className="text-gray-400 text-sm">{skill.description}</p>
                   </div>
-                  <h3 className="text-xl font-bold ml-4 text-apple-dark">Collaboration</h3>
-                </div>
-                
-                <div>
-                  {collaborationSkills.map((skill, index) => (
-                    <SkillItem key={skill.name} skill={skill} index={index} />
-                  ))}
-                </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Collaboration Skills */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="bg-[#21262D]/50 backdrop-blur-sm p-6 rounded-xl border border-[#FD5F07]/20 hover:border-[#FD5F07]/40 transition-colors duration-300"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-[#FD5F07] rounded-lg">
+                <svg className="w-6 h-6 text-[#FFFFFF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
               </div>
-            </ScrollReveal>
-          </div>
+              <h3 className="text-xl font-bold text-[#FD5F07]">Collaboration</h3>
+            </div>
+            <ul className="space-y-4">
+              {collaborationSkills.map((skill, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#FD5F07] mt-2"></div>
+                  <div>
+                    <p className="text-gray-300 font-medium">{skill.name}</p>
+                    <p className="text-gray-400 text-sm">{skill.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </div>
       </div>
     </section>

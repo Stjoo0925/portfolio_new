@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'SoontaeJoo\'s Portfolio',
+  metadataBase: new URL('https://soontaejoo.vercel.app'),
+  title: 'SoontaeJoo | Portfolio',
   description: '주순태의 개발자 포트폴리오 입니다',
   manifest: '/icons/site.webmanifest',
   icons: {
@@ -35,6 +36,7 @@ export const metadata: Metadata = {
     images: ['/images/og-image.webp'],
   },
 }
+
 export default function RootLayout({
   children,
 }: {

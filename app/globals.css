@@ -2,6 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 13, 17, 23;
+  --accent-color: #ff4500;
+  --accent-hover: #ff4500;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.btn {
+  @apply px-6 py-3 rounded-full font-medium transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-[#ff4500] text-white hover:bg-[#ff4500];
+}
+
+.btn-secondary {
+  @apply bg-[#21262D] text-white hover:bg-[#30363D];
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(30px) scale(1.1);
+  }
+}
+
+@keyframes float-more-delayed {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 10s ease-in-out infinite;
+}
+
+.animate-float-more-delayed {
+  animation: float-more-delayed 9s ease-in-out infinite;
+}
+
 @font-face {
   font-family: 'Paperlogy-8ExtraBold';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
@@ -11,36 +95,24 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     height: 100%;
   }
 
   body {
-    @apply bg-white text-apple-dark;
+    @apply bg-[#0D1117] text-white;
     font-family: 'Paperlogy-8ExtraBold', sans-serif;
     height: 100%;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
   }
 
   section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-height: 100dvh;
   }
 }
 
 @layer components {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  .btn {
-    @apply bg-apple-blue text-white font-medium py-2 px-4 rounded-full 
-           hover:bg-blue-600 transition-colors duration-300;
   }
   
   .section {
