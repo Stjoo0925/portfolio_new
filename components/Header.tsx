@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           className="text-2xl font-bold text-apple-dark"
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-apple-blue to-apple-blue-dark">
-            SoontaeJoo's Portfolio
+            Soontae Joo
           </span>
         </motion.div>
         

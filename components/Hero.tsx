@@ -1,13 +1,44 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import PageIndicator from './PageIndicator'
 
 const Hero = () => {
+  const [currentPage, setCurrentPage] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['main', 'about', 'skills', 'projects', 'contact']
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = document.getElementById(sections[i])
+        if (section) {
+          const sectionTop = section.offsetTop
+          const sectionBottom = sectionTop + section.offsetHeight
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            setCurrentPage(i)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // 초기 위치 설정
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section id="main" className="min-h-screen pt-32 pb-10 bg-white overflow-hidden">
+    <section id="main" className="min-h-screen pt-32 pb-10 bg-gradient-to-b from-white to-gray-50 overflow-hidden relative">
+      {/* 배경 패턴 */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      
       <div className="container px-4 mx-auto relative z-10">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -18,11 +49,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight"
+              className="text-4xl md:text-5xl font-bold mb-6 leading-tight tracking-tight"
             >
-              <span className="block">창의적인 웹 개발자</span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-apple-blue to-blue-600">
-                포트폴리오
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
+                안녕하세요! 저는 주순태입니다
               </span>
             </motion.h1>
             
@@ -30,104 +60,41 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              현대적인 웹 경험을 창조하는 개발자의 작품 모음집입니다.
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-semibold">
+                배움을 통해 지속적인 성장을 추구하는 개발자
+              </span>
               <br className="hidden md:block" />
-              아름다움과 기능성의 완벽한 균형을 추구합니다.
+              신기술과 개발 트렌드를 꾸준히 탐구하며,
+              <br className="hidden md:block" />
+              이를 프로젝트에 적용하는 과정에서 얻는 배움을 통해 성장하고 있습니다.
             </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row justify-center gap-4"
-            >
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="btn px-8 py-4 text-lg rounded-full shadow-apple-button hover:shadow-apple-hover transition-all duration-300"
+
+            <div className="flex justify-center gap-4">
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors duration-300 flex items-center gap-2"
               >
-                프로젝트 보기
-              </motion.button>
-              
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="bg-white text-apple-dark border border-gray-300 px-8 py-4 text-lg rounded-full shadow-apple-button hover:shadow-apple-hover hover:bg-gray-50 transition-all duration-300"
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.237 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+              <a
+                href="https://yourblog.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-white text-blue-600 rounded-full hover:bg-gray-50 transition-colors duration-300 flex items-center gap-2 border border-blue-200"
               >
-                연락하기
-              </motion.button>
-            </motion.div>
-          </motion.div>
-          
-          {/* 데코 요소들 */}
-          <div className="relative">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.8 }}
-              className="w-full h-72 md:h-96 lg:h-[500px] bg-apple-gray rounded-3xl overflow-hidden shadow-apple flex items-center justify-center"
-            >
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                className="relative"
-              >
-                <div className="absolute -inset-px rounded-full blur-3xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-75"></div>
-                <div className="text-[150px] md:text-[200px] lg:text-[250px] font-bold relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-apple-blue via-blue-500 to-indigo-600">P</div>
-              </motion.div>
-              
-              {/* 배경 그래픽 요소들 */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
-                transition={{ duration: 1.5, delay: 1 }}
-                className="absolute top-0 left-0 w-full h-full overflow-hidden"
-              >
-                <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-blue-500/10 blur-2xl"></div>
-                <div className="absolute top-1/3 right-1/4 w-40 h-40 rounded-full bg-purple-500/10 blur-3xl"></div>
-                <div className="absolute bottom-1/4 left-1/3 w-48 h-48 rounded-full bg-apple-blue/10 blur-3xl"></div>
-              </motion.div>
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-16 flex justify-center"
-          >
-            <motion.div 
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              className="flex flex-col items-center cursor-pointer"
-              onClick={() => {
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              <p className="text-gray-500 mb-2">스크롤하여 더 알아보기</p>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-6 w-6 text-apple-blue" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                />
-              </svg>
-            </motion.div>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15" />
+                </svg>
+                Tech Blog
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -137,6 +104,10 @@ const Hero = () => {
         <div className="absolute right-0 top-0 w-1/3 h-1/3 bg-gradient-to-bl from-blue-100/80 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute left-0 bottom-0 w-1/3 h-1/3 bg-gradient-to-tr from-purple-100/50 to-transparent rounded-full blur-3xl"></div>
       </div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-gradient-to-r from-blue-50/50 to-purple-50/50 rounded-full blur-3xl"></div>
+      </div>
+      <PageIndicator currentPage={currentPage} totalPages={5} />
     </section>
   )
 }

@@ -15,133 +15,173 @@ const About = () => {
   }
   
   return (
-    <section id="about" className="py-24 md:py-32 bg-white relative">
-      <div className="container px-4 mx-auto">
-        <ScrollReveal>
-          <h2 className="text-4xl md:text-5xl font-bold mb-10 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-apple-blue to-blue-600">
-              About
-            </span>
-          </h2>
-        </ScrollReveal>
-        
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <ScrollReveal delay={0.2}>
-              <div className="relative">
-                <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-apple-gray flex items-center justify-center shadow-apple">
-                  <div className="relative">
-                    <motion.div 
-                      animate={{ rotate: 360 }}
-                      transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-                      className="absolute -inset-12 rounded-full opacity-20 blur-xl bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-pink-500/40"
-                    ></motion.div>
-                    <div className="text-[150px] relative">👨‍💻</div>
-                  </div>
-                </div>
-                
-                {/* 데코레이션 요소 */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                  className="absolute -top-4 -right-4 md:top-auto md:-bottom-8 md:-right-8 bg-white rounded-xl shadow-apple p-4 z-10"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-apple-blue rounded-full flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold">5+ 년간의</p>
-                      <p className="text-lg font-bold text-apple-dark">개발 경험</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 bg-white rounded-xl shadow-apple p-4 z-10"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full flex items-center justify-center text-white">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
-                        <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-xs font-semibold">20+</p>
-                      <p className="text-lg font-bold text-apple-dark">프로젝트</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </ScrollReveal>
-            
-            <div>
-              <ScrollReveal delay={0.4}>
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-apple-blue">
-                  창의적인 웹 개발자 
-                </h3>
-              </ScrollReveal>
-              
-              <div className="space-y-6 text-gray-600 leading-relaxed">
-                <ScrollReveal delay={0.5}>
-                  <p className="text-lg">
-                    사용자 중심 디자인과 깔끔한 코드를 통해 웹 사이트를 개발하는 것을 좋아합니다. 
-                    항상 새로운 기술을 배우고 적용하여 최신 트렌드를 따릅니다.
-                  </p>
-                </ScrollReveal>
-                
-                <ScrollReveal delay={0.6}>
-                  <p className="text-lg">
-                    프론트엔드와 백엔드 모두에 경험이 있으며, 특히 React와 TypeScript를 활용한 
-                    현대적인 웹 애플리케이션 구축에 전문성을 갖고 있습니다.
-                  </p>
-                </ScrollReveal>
-                
-                <ScrollReveal delay={0.7}>
-                  <p className="text-lg">
-                    협업과 소통을 중요시하며, 사용자와 클라이언트의 니즈를 이해하고
-                    그에 맞는 최적의 솔루션을 제공하기 위해 노력합니다.
-                  </p>
-                </ScrollReveal>
-                
-                <ScrollReveal delay={0.8}>
-                  <div className="mt-10 flex flex-wrap gap-4">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }} 
-                      className="btn text-base py-3 px-8 rounded-full shadow-apple-button"
-                    >
-                      이력서 보기
-                    </motion.button>
-                    
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.98 }} 
-                      className="text-base py-3 px-8 text-apple-dark bg-white border border-gray-200 rounded-full shadow-apple-button hover:bg-gray-50 font-medium flex items-center"
-                    >
-                      더 알아보기
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </motion.button>
-                  </div>
-                </ScrollReveal>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section id="about" className="min-h-screen py-12 bg-white relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 -z-10 bg-gradient-to-bl from-blue-50/50 via-blue-100/30 to-transparent rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 -z-10 bg-gradient-to-tr from-indigo-50/50 via-indigo-100/30 to-transparent rounded-full blur-3xl"></div>
       
-      {/* 배경 데코 */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 -z-10 bg-gradient-to-bl from-blue-50 via-indigo-50 to-transparent opacity-70 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/3 -z-10 bg-gradient-to-tr from-apple-blue/5 via-blue-50 to-transparent opacity-70 rounded-full blur-3xl"></div>
+      <div className="container mx-auto px-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        >
+          {/* 좌측: 자기소개 */}
+          <div className="space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-blue-100 shadow-xl">
+                <img 
+                  src="/images/profile-img.jpg" 
+                  alt="주순태 프로필" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/30 to-transparent"></div>
+              </div>
+            </motion.div>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-4xl font-bold text-center"
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600">
+                About Me
+              </span>
+            </motion.h2>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="prose prose-lg max-w-none bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-xl border border-blue-50"
+            >
+              <p className="text-gray-600 leading-relaxed">
+                <span className="text-2xl font-bold text-gray-900 block mb-4">안녕하세요! 저는 주순태입니다.</span>
+                <span className="text-lg text-blue-600 font-semibold block mb-4">배움을 통해 지속적인 성장을 추구합니다.</span>
+                <span className="text-sm text-gray-700 block mb-4">
+                  신기술과 개발 트렌드를 꾸준히 탐구하며, 이를 프로젝트에 적용하는 과정에서 얻는 배움을 통해 지속적인 성장을 추구합니다. 
+                  여러 프로젝트 경험을 통해 제한된 시간과 자원 속에서도 최선의 결과를 도출하는 문제 해결 능력을 키웠으며, 
+                  이는 현재 진행하는 모든 프로젝트에서 중요한 자산이 되고 있습니다.
+                </span>
+                <span className="text-lg text-blue-600 font-semibold block mb-4">팀 프로젝트를 진행하며 '함께'의 가치를 배웠습니다.</span>
+                <span className="text-sm text-gray-700 block">
+                  서로 다른 배경과 경험을 가진 팀원들의 다양한 관점이 프로젝트의 완성도를 높이는 핵심 요소임을 깨달았으며, 
+                  이를 통해 협업의 시너지를 극대화하는 개발자로 성장하고 있습니다.
+                </span>
+              </p>
+            </motion.div>
+          </div>
+
+          {/* 우측: 카드 그리드 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <motion.div 
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-blue-50 hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-blue-600 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                경력
+              </h3>
+              <div className="space-y-4">
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">랜드마크앤코 주식회사</p>
+                  <p className="text-blue-600 text-sm font-medium">2019.07 - 2023.08 (4년1개월)</p>
+                  <p className="text-gray-500 text-sm">토목건설업</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-blue-600 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                </svg>
+                학력
+              </h3>
+              <div className="space-y-4">
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">숭실사이버대학교</p>
+                  <p className="text-blue-600 text-sm font-medium">건설시스템공학과</p>
+                  <p className="text-gray-500 text-sm">2020.03 - 2024.02 / 학점 : 3.76</p>
+                </div>
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">서울 대원고등학교</p>
+                  <p className="text-gray-500 text-sm">2008.03 - 2011.02</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-blue-600 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                교육 과정
+              </h3>
+              <div className="space-y-4">
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">클라우드 기반의 CI/CD를 활용한 풀스택 [자바, 뷰, 플러터] 개발자</p>
+                  <p className="text-blue-600 text-sm font-medium">2024.04 - 2024.10</p>
+                  <p className="text-gray-500 text-sm">하이미디어 아카데미</p>
+                </div>
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">심화_생성형 AI활용 인재 양성과정(조별멘토)</p>
+                  <p className="text-blue-600 text-sm font-medium">2024.10 - 2024.12</p>
+                  <p className="text-gray-500 text-sm">하이미디어 아카데미</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+            >
+              <h3 className="text-xl font-bold mb-4 text-blue-600 flex items-center">
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                자격증
+              </h3>
+              <div className="space-y-4">
+                <div className="relative pl-4 border-l-2 border-blue-100">
+                  <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-blue-500"></div>
+                  <p className="font-bold text-base text-gray-900">인공지능학습데이터전문가 2급</p>
+                  <p className="text-blue-600 text-sm font-medium">2025.01.20</p>
+                  <p className="text-gray-500 text-sm">한국인공지능자격센터</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }

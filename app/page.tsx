@@ -11,14 +11,15 @@ import Footer from '@/components/Footer'
 import PageIndicator from '@/components/PageIndicator'
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('main')
+  const [activeSection, setActiveSection] = useState('section-0')
+  const [isScrolling, setIsScrolling] = useState(false)
   
   // 스크롤 위치에 따라 활성 섹션을 결정하는 함수
   const determineActiveSection = () => {
     const sections = document.querySelectorAll('section[id]')
-    const scrollPosition = window.scrollY + 100
+    const scrollPosition = window.scrollY + window.innerHeight / 2
     
-    let currentSection = 'main'
+    let currentSection = 'section-0'
     sections.forEach(section => {
       const sectionTop = (section as HTMLElement).offsetTop
       const sectionHeight = section.clientHeight
@@ -29,13 +30,24 @@ export default function Home() {
       }
     })
     
-    // 페이지 맨 아래에 도달했을 때 마지막 섹션(contact) 활성화
-    const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
-    if (isAtBottom) {
-      return 'contact'
+    return currentSection
+  }
+  
+  // 섹션으로 스크롤하는 함수
+  const scrollToSection = (sectionId: string) => {
+    if (isScrolling) return
+    
+    setIsScrolling(true)
+    const section = document.getElementById(sectionId)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' })
+      setActiveSection(sectionId)
     }
     
-    return currentSection
+    // 스크롤 애니메이션이 끝난 후 상태 초기화
+    setTimeout(() => {
+      setIsScrolling(false)
+    }, 1000)
   }
   
   useEffect(() => {
@@ -44,6 +56,7 @@ export default function Home() {
     setActiveSection(initialActiveSection)
     
     const handleScroll = () => {
+      if (isScrolling) return
       const currentSection = determineActiveSection()
       setActiveSection(currentSection)
     }
@@ -57,12 +70,12 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleScroll)
     }
-  }, [])
+  }, [isScrolling])
   
   return (
     <main className="min-h-screen">
-      <Header activeSection={activeSection} setActiveSection={setActiveSection} />
-      <PageIndicator activeSection={activeSection} setActiveSection={setActiveSection} />
+      <Header activeSection={activeSection} setActiveSection={scrollToSection} />
+      <PageIndicator activeSection={activeSection} setActiveSection={scrollToSection} />
       
       <Hero />
       <About />

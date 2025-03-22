@@ -20,11 +20,11 @@ const Footer = () => {
             >
               <h3 className="text-xl font-semibold mb-4 relative text-gray-900">
                 <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-apple-blue to-apple-blue-dark">
-                  SoonTaeJoo's Portfolio
+                  SoonTae Joo
                 </span>
               </h3>
               <div className="text-gray-500 text-xs md:mr-8">
-                © {currentYear} SoonTaeJoo's Portfolio. All rights reserved.
+                © {currentYear} stjoo0925. All rights reserved.
               </div>
             </motion.div>
           </div>
