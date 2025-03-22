@@ -25,7 +25,7 @@ const PageIndicator: React.FC<PageIndicatorProps> = ({ activeSection, setActiveS
   return (
     <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col items-center">
       <motion.div 
-        className="py-3 px-4 bg-white/70 backdrop-blur-md rounded-full shadow-sm border border-gray-100 flex flex-col items-center gap-5"
+        className="py-3 px-2 bg-white/70 backdrop-blur-md rounded-full shadow-sm border border-gray-100 flex flex-col items-center gap-5"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
