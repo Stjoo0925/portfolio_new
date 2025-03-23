@@ -9,15 +9,25 @@
   --accent-hover: #ff4500;
 }
 
+/* 스크롤바 숨기기 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox에서 스크롤바 숨기기 */
+html {
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  height: 100%;
+}
+
+/* IE 및 Edge에서 스크롤바 숨기기 */
 body {
+  -ms-overflow-style: none;
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
   overflow-x: hidden;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 section {
