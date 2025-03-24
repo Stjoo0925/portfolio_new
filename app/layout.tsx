@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     images: [
       {
-        url: '/images/og-image.webp',
+        url: 'https://soontaejoo.vercel.app/images/og-image.webp',
         width: 1200,
         height: 630,
         alt: '포트폴리오 썸네일',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'SoontaeJoo\'s Portfolio',
     description: '주순태의 개발자 포트폴리오 입니다',
-    images: ['/images/og-image.webp'],
+    images: ['https://soontaejoo.vercel.app/images/og-image.webp'],
   },
 }
 
