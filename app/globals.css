@@ -30,6 +30,16 @@ body {
   overflow-x: hidden;
 }
 
+/* 특정 요소에 대한 스크롤바 숨기기 클래스 */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
+}
+
 section {
   scroll-snap-align: start;
   height: 100dvh;

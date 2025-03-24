@@ -5,6 +5,17 @@ import { motion } from 'framer-motion'
 import { FaGithub } from 'react-icons/fa'
 
 const Hero = () => {
+  const [particlePositions, setParticlePositions] = useState<Array<{top: string, left: string}>>([]);
+
+  useEffect(() => {
+    // 부유하는 빛 입자 위치 생성
+    const particles = Array(10).fill(null).map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+    }));
+    setParticlePositions(particles);
+  }, []);
+
   return (
     <section id="main" className="min-h-screen bg-[#070B14] relative overflow-hidden">
       {/* 우주 배경 - 새벽 효과 */}
@@ -45,13 +56,13 @@ const Hero = () => {
       />
       
       {/* 부유하는 빛 입자 - 수를 10개로 줄임 */}
-      {[...Array(10)].map((_, i) => (
+      {particlePositions.length > 0 && particlePositions.map((particle, i) => (
         <motion.div
           key={`hero-particle-${i}`}
           className="absolute w-1 h-1 bg-white/30 rounded-full hidden md:block"
           style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
+            top: particle.top,
+            left: particle.left,
           }}
           animate={{
             y: [0, -20],

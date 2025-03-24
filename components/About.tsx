@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from './animations/ScrollReveal'
 import Image from 'next/image'
@@ -9,6 +9,25 @@ import { FaFileAlt } from 'react-icons/fa'
 const About = () => {
   const [showResume, setShowResume] = useState(false);
   const currentPage = 1
+  const [asteroidPositions, setAsteroidPositions] = useState<Array<{
+    width: string,
+    height: string,
+    top: string,
+    left: string,
+    opacity: number
+  }>>([]);
+
+  useEffect(() => {
+    // 소행성 위치 생성
+    const asteroids = Array(4).fill(null).map(() => ({
+      width: Math.random() * 2 + 1 + 'px',
+      height: Math.random() * 2 + 1 + 'px',
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      opacity: Math.random() * 0.3 + 0.1,
+    }));
+    setAsteroidPositions(asteroids);
+  }, []);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -37,17 +56,17 @@ const About = () => {
       {/* 은하수 효과 */}
       <div className="absolute bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-[#3B82F6]/5 via-[#8B5CF6]/5 to-transparent blur-2xl animate-nebula-glow-slow opacity-30 -z-5"></div>
       
-      {/* 우주 행성 소행성 - 수를 4개로 줄임 */}
-      {[...Array(4)].map((_, i) => (
+      {/* 소행성 효과 */}
+      {asteroidPositions.length > 0 && asteroidPositions.map((asteroid, i) => (
         <motion.div
           key={`about-asteroid-${i}`}
           className="absolute bg-white rounded-full hidden md:block"
           style={{
-            width: Math.random() * 2 + 1 + 'px',
-            height: Math.random() * 2 + 1 + 'px',
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            opacity: Math.random() * 0.3 + 0.1,
+            width: asteroid.width,
+            height: asteroid.height,
+            top: asteroid.top,
+            left: asteroid.left,
+            opacity: asteroid.opacity,
           }}
           animate={{
             x: [0, Math.random() * 10 - 5],
@@ -88,6 +107,7 @@ const About = () => {
                   src="/images/profile-img.jpg"
                   alt="Profile"
                   fill
+                  sizes="(max-width: 768px) 100vw, 192px"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#FD5F07]/20 to-transparent"></div>
@@ -166,7 +186,7 @@ const About = () => {
               <div className="mt-2 flex-grow">
                 <p className="text-gray-100 font-medium">랜드마크앤코 주식회사</p>
                 <p className="text-gray-400 text-sm mt-1">2019.07 - 2023.08 (4년1개월)</p>
-                <p className="text-gray-400 text-sm mt-1">토목건설업</p>
+                <p className="text-gray-400 text-sm mt-1">토목 및 도시개발 사업부</p>
               </div>
             </motion.div>
 

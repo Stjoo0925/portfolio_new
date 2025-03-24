@@ -1,12 +1,29 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from './animations/ScrollReveal'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaTwitter, FaDiscord } from 'react-icons/fa'
 
 const Contact = () => {
   const currentPage = 4
+  const [starPositions, setStarPositions] = useState<Array<{
+    top: string,
+    left: string,
+    opacity: number,
+    animation: string
+  }>>([]);
+
+  useEffect(() => {
+    // 별 위치 생성
+    const stars = Array(10).fill(null).map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      opacity: Math.random() * 0.3 + 0.1,
+      animation: `twinkle-small ${Math.random() * 3 + 2}s ease-in-out infinite ${Math.random() * 2}s`
+    }));
+    setStarPositions(stars);
+  }, []);
 
   return (
     <section id="contact" className="bg-[#070B14] relative overflow-hidden min-h-screen py-20">
@@ -34,16 +51,16 @@ const Contact = () => {
         <div className="w-full h-[150%] -mt-[50%] bg-gradient-to-b from-transparent via-[#3B82F6]/30 to-transparent animate-data-stream"></div>
       </div>
       
-      {/* 작은 별</하얀 점들 - 10개로 줄임 */}
-      {[...Array(10)].map((_, i) => (
+      {/* 별 효과 */}
+      {starPositions.length > 0 && starPositions.map((star, i) => (
         <div
           key={`contact-star-${i}`}
           className="absolute w-0.5 h-0.5 bg-white/40 rounded-full hidden md:block"
           style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            opacity: Math.random() * 0.3 + 0.1,
-            animation: `twinkle-small ${Math.random() * 3 + 2}s ease-in-out infinite ${Math.random() * 2}s`
+            top: star.top,
+            left: star.left,
+            opacity: star.opacity,
+            animation: star.animation
           }}
         ></div>
       ))}

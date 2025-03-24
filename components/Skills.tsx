@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { 
   FrontendIcon, BackendIcon, DevOpsIcon, CollaborationIcon,
@@ -17,6 +17,17 @@ interface Skill {
 }
 
 const Skills = () => {
+  const [meteorPositions, setMeteorPositions] = useState<Array<{
+    top: string,
+    width: string,
+    delay: number
+  }>>([]);
+
+  const [particlePositions, setParticlePositions] = useState<Array<{
+    top: string,
+    left: string
+  }>>([]);
+
   const currentPage = 2
 
   const frontendSkills: Skill[] = [
@@ -67,6 +78,23 @@ const Skills = () => {
     </motion.div>
   )
   
+  useEffect(() => {
+    // 유성 위치 생성
+    const meteors = Array(3).fill(null).map((_, i) => ({
+      top: `${i * 25 + 15}%`,
+      width: `${Math.random() * 80 + 40}px`,
+      delay: i * 7
+    }));
+    setMeteorPositions(meteors);
+
+    // 입자 위치 생성
+    const particles = Array(8).fill(null).map(() => ({
+      top: `${Math.random() * 80 + 10}%`,
+      left: `${Math.random() * 80 + 10}%`,
+    }));
+    setParticlePositions(particles);
+  }, []);
+
   return (
     <section id="skills" className="bg-[#070B14] relative overflow-hidden min-h-screen py-20">
       {/* 우주 배경 - 별자리 테마 */}
@@ -116,14 +144,14 @@ const Skills = () => {
       ))}
       
       {/* 유성 효과 */}
-      {[...Array(3)].map((_, i) => (
+      {meteorPositions.length > 0 && meteorPositions.map((meteor, i) => (
         <motion.div
           key={`skills-meteor-${i}`}
           className="absolute h-0.5 bg-white rounded-full hidden md:block"
           style={{
-            top: `${i * 25 + 15}%`,
+            top: meteor.top,
             left: '100%',
-            width: `${Math.random() * 80 + 40}px`,
+            width: meteor.width,
             opacity: 0,
             transform: 'rotate(-20deg)',
             boxShadow: '0 0 8px 1px rgba(255, 255, 255, 0.7)',
@@ -137,19 +165,19 @@ const Skills = () => {
             repeat: Infinity,
             repeatDelay: Math.random() * 15 + 10,
             ease: "easeOut",
-            delay: i * 7,
+            delay: meteor.delay,
           }}
         />
       ))}
       
       {/* 움직이는 점/입자 (스킬 연결) */}
-      {[...Array(10)].map((_, i) => (
+      {particlePositions.length > 0 && particlePositions.map((particle, i) => (
         <motion.div
           key={`skills-particle-${i}`}
           className="absolute w-1 h-1 bg-[#FD5F07]/70 rounded-full hidden md:block"
           style={{
-            top: `${Math.random() * 80 + 10}%`,
-            left: `${Math.random() * 80 + 10}%`,
+            top: particle.top,
+            left: particle.left,
           }}
           animate={{
             y: [0, Math.random() * 100 - 50],
