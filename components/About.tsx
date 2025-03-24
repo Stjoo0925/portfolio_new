@@ -29,6 +29,22 @@ const About = () => {
     setAsteroidPositions(asteroids);
   }, []);
 
+  // 모달이 열리거나 닫힐 때 스크롤 제어
+  useEffect(() => {
+    if (showResume) {
+      // 모달이 열릴 때 스크롤 잠금
+      document.body.style.overflow = 'hidden';
+    } else {
+      // 모달이 닫힐 때 스크롤 잠금 해제
+      document.body.style.overflow = 'visible';
+    }
+    
+    // 컴포넌트 언마운트 시 스크롤 잠금 해제
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, [showResume]);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
